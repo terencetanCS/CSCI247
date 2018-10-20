@@ -6,8 +6,11 @@ int main() {
 }
 
 int CountSetBits(unsigned int var) {
-	
-	return var;
+	int bits = 0;
+	for (int i = 0; i < var.length(); i++) {
+		bits = bits + 2;
+	}
+	return bits;
 }
 
 int IdentifyUniqueInteger(int arrayCount, int* intArray) {
@@ -33,4 +36,3 @@ int SwapNibbles(int c) {
 int NumberOfOPerationsREquire(int d) {
 	return 0;
 }
-
