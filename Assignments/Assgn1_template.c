@@ -1,7 +1,7 @@
 //For Assignment 1 here is a possible template to start from...
 
 //========================================================================================================================================================
-//CODE STARTS HERE!!!!!!!!!!!!!!!!!!
+
 
 #include <time.h>
 #include <stdio.h>
@@ -64,22 +64,23 @@ void DisplayThreadSchdAttributes( pthread_t threadID, int policy, int priority )
 									"???",
 									priority);
 }
-/*CURRENT!!!!!!!!!!!!!!!!!!!!!!1
+
 //========================================================================================================================================================
 void DisplayThreadArgs(ThreadArgs*	myThreadArg)
 {
 int i,y;
 
-if( myThreadArg )
-{
+	if( myThreadArg )
+	{
 	DisplayThreadSchdAttributes(myThreadArg->threadId, myThreadArg->threadPolicy, myThreadArg->threadPri);
 	printf(" startTime = %s endTime = %s", ctime(&myThreadArg->startTime), ctime(&myThreadArg->endTime));
 	printf(" TimeStamp [%"PRId64"]\n", myThreadArg->timeStamp[0] );
 
-	for(y=1; y<MAX_TASK_COUNT+1; y++)
-	{
-		printf(" TimeStamp [%"PRId64"] Delta [%"PRId64"]us\n", myThreadArg->timeStamp[y],
-		(myThreadArg->timeStamp[y]-myThreadArg->timeStamp[y-1]));
+		for(y=1; y<MAX_TASK_COUNT+1; y++)
+		{
+			printf(" TimeStamp [%"PRId64"] Delta [%"PRId64"]us\n", myThreadArg->timeStamp[y],
+			(myThreadArg->timeStamp[y]-myThreadArg->timeStamp[y-1]));
+		}
 	}
 }
 
@@ -96,20 +97,20 @@ void DoProcess(void)
 
 void* threadFunction(void *arg)
 {
-	1.	Typecast the argument to a �ThreadArgs*� variable
+	/*1.	Typecast the argument to a �ThreadArgs*� variable
 	2.	Use the �pthread_setscheduleparam� API to set the thread policy
 	3.	Init the Condition variable and associated mutex
 	4.	Wait on condition variable
 	5.	Once condition variable is signaled, use the �time� function and the �clock_gettime(CLOCK_REALTIME, &tms)� to get timestamp
 	6.	Call �DoProcess� to run your task
 	7.	Use �time� and �clock_gettime� to find end time.
-	8.	You can repeat steps 6 and 7 a few times if you wish
+	8.	You can repeat steps 6 and 7 a few times if you wish */
 }
-CODE ENDS HERE !!!!!!!!!!!!!!!!!!!!!!!!!! MINUS MAIN!!!!!!!!!!!!!!!!!!!*/
 //========================================================================================================================================================
 int main (int argc, char *argv[])
 {
 	InitGlobals();
+	pthread_t thread1, thread2, thread3, thread4, thread5, thread6, thread7, thread8, thread9;
 /*	1.	Call InitGlobals
 	2.	Create a number of threads (start with 1 and increase to 9) using �pthread_Create�
 	3.	Assign 3 threads to SCHED_OTHER, another 3 to SCHED_FIFO and another 3 to SCHED_RR
