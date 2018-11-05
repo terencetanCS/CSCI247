@@ -16,7 +16,7 @@
 //========================================================================================================================================================
 //#defines
 #define MAX_THREAD_COUNT 9
-#define MAX_TASK_COUNT
+#define MAX_TASK_COUNT 9
 
 
 
@@ -99,6 +99,9 @@ void* threadFunction(void *arg)
 {
 	ThreadArgs*	myThreadArg;
 	myThreadArg = (ThreadArgs*)arg;
+	if (myThreadArg.threadCount == 1 || myThreadArg.threadCount == 2 || myThreadArg.threadCount == 3) {
+		int pthread_setscheduleparam(myThreadArg.threadId, SCHED_OTHER, &param);
+	}
 	/*1.	Typecast the argument to a �ThreadArgs*� variable
 	2.	Use the �pthread_setscheduleparam� API to set the thread policy
 	3.	Init the Condition variable and associated mutex
@@ -114,21 +117,21 @@ int main (int argc, char *argv[])
 	InitGlobals();
 	ThreadArgs myThreadArgs;
 	pthread_t thread1, thread2, thread3, thread4, thread5, thread6, thread7, thread8, thread9;
-	pthread_create( &thread1, (void*) SCHED_OTHER, threadFunction, NULL);
-	/*pthread_create( &thread2, (void*) SCHED_OTHER, threadFunction, NULL);
-	pthread_create( &thread3, (void*) SCHED_OTHER, threadFunction, NULL);
-	pthread_create( &thread4, (void*) SCHED_FIFO, threadFunction, NULL);
-	pthread_create( &thread5, (void*) SCHED_FIFO, threadFunction, NULL);
-	pthread_create( &thread6, (void*) SCHED_FIFO, threadFunction, NULL);
-	pthread_create( &thread7, (void*) SCHED_RR, threadFunction, NULL);
-	pthread_create( &thread8, (void*) SCHED_RR, threadFunction, NULL);
-	pthread_create( &thread9, (void*) SCHED_RR, threadFunction, NULL);*/
-	myThreadArgs.threadCount = 0;
+	pthread_create( &thread1, (void*) SCHED_OTHER, &threadFunction, NULL);
+	/*pthread_create( &thread2, (void*) SCHED_OTHER, &threadFunction, NULL);
+	pthread_create( &thread3, (void*) SCHED_OTHER, &threadFunction, NULL);
+	pthread_create( &thread4, (void*) SCHED_FIFO, &threadFunction, NULL);
+	pthread_create( &thread5, (void*) SCHED_FIFO, &threadFunction, NULL);
+	pthread_create( &thread6, (void*) SCHED_FIFO, &threadFunction, NULL);
+	pthread_create( &thread7, (void*) SCHED_RR, &threadFunction, NULL);
+	pthread_create( &thread8, (void*) SCHED_RR, &threadFunction, NULL);
+	pthread_create( &thread9, (void*) SCHED_RR, &threadFunction, NULL);*/
+	myThreadArgs.threadCount = 1;
 	pthread_attr_t threadAttrib;
 	while(myThreadArgs.threadCount < MAX_THREAD_COUNT)
 	{
 		if( pthread_create(&(g_ThreadArgs[myThreadArgs.threadCount].threadId), &threadAttrib, &threadFunction, &g_ThreadArgs[myThreadArgs.threadCount])) {
-
+			printf("This thread has failed: %lu\n", &(g_ThreadArgs[myThreadArgs.threadCount].threadId));
 		}
 
 		myThreadArgs.threadCount++;
